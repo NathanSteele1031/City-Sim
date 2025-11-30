@@ -24,6 +24,14 @@ class Road():
 class Road_System():
     def __init__(self):
         self.roads = []
+
+    def does_snap(self, x, y):
+        for road in self.roads:
+            if (road.starting_x + 10 > x > road.starting_x - 10) and (road.starting_y + 10 > y > road.starting_y - 10):
+                return True
+            if (road.ending_x + 10 > x > road.ending_x - 10) and (road.ending_y + 10 > y > road.ending_y - 10):
+                return True
+        return False
     
     def add_road(self, road: Road):
         self.roads.append(road)
