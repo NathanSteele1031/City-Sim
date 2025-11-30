@@ -24,7 +24,12 @@ def main():
                 if not sample_road:
                     sample_road = roads.Road(*pygame.mouse.get_pos(), 0, 0)
                 else:
-                    sample_road.set_ending_point(*pygame.mouse.get_pos())
+                    if road_system.does_snap(*sample_road.get_end_point()):
+                        snap_position = road_system.get_snap_position(*sample_road.get_end_point())
+                        if snap_position:
+                            sample_road.set_ending_point(*snap_position)
+                    else:
+                        sample_road.set_ending_point(*pygame.mouse.get_pos())
                     road_system.add_road(sample_road)
                     sample_road = None
 
@@ -32,6 +37,10 @@ def main():
 
         if sample_road:
             sample_road.set_ending_point(*pygame.mouse.get_pos())
+            if road_system.does_snap(*sample_road.get_end_point()):
+                snap_position = road_system.get_snap_position(*sample_road.get_end_point())
+                if snap_position:
+                    sample_road.set_ending_point(*snap_position)
             sample_road.draw(display)
 
         for road in road_system.roads:
