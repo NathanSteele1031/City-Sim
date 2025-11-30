@@ -4,8 +4,10 @@ def main():
     pygame.init()
     display = pygame.display.set_mode((800, 600))
     running = True
+
     road_mode = False
     sample_road = None
+    road_system = roads.Road_System()
 
     buildings = []
 
@@ -23,7 +25,7 @@ def main():
                     sample_road = roads.Road(*pygame.mouse.get_pos(), 0, 0)
                 else:
                     sample_road.set_ending_point(*pygame.mouse.get_pos())
-                    buildings.append(sample_road)
+                    road_system.add_road(sample_road)
                     sample_road = None
 
         display.fill(colors.GREEN)
@@ -31,6 +33,9 @@ def main():
         if sample_road:
             sample_road.set_ending_point(*pygame.mouse.get_pos())
             sample_road.draw(display)
+
+        for road in road_system.roads:
+            road.draw(display)
 
         for building in buildings:
             building.draw(display)
