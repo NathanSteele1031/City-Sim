@@ -20,3 +20,14 @@ class Road():
     
     def draw(self, screen: pygame.Surface):
         pygame.draw.line(screen, (0, 0, 0), (self.starting_x, self.starting_y), (self.ending_x, self.ending_y), 5)
+
+class Road_System():
+    def __init__(self):
+        self.roads = []
+    
+    def add_road(self, road: Road):
+        self.roads.append(road)
+    
+    def draw(self, screen: pygame.Surface):
+        for road in self.roads:
+            road.draw(screen)
