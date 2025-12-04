@@ -1,4 +1,4 @@
-import pygame
+import pygame, colors
 
 class Building:
     def __init__(self, x, y):
@@ -8,4 +8,5 @@ class Building:
     def draw(self, screen: pygame.Surface): 
         # Need to know the valid place to put buildings on roads
         # Need to know the rotation so the buildings are alined with the roads
-        pass
+        rect_value = pygame.rect.Rect((self.x, self.y), (10, 10))
+        pygame.draw.rect(screen, colors.BLACK, (self.x, self.y, 10, 10))
